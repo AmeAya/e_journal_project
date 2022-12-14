@@ -18,6 +18,10 @@
                 Logout
             </button>
         </a>
+        {% for subject in subjects %}
+            <h3>Subject Name: {{ subject.title }}</h3>
+            <p>Price: {{ subject.price }}</p>
+        {% endfor %}
     {% endif %}
 </body>
 </html>
