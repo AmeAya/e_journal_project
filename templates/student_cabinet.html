@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Student Cabinet</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
     <h1>{{ student.name }} {{ student.surname }}</h1>
     <h4>{{ group.name }}</h4>
     <h1>Your Grades History:</h1>
@@ -16,5 +11,4 @@
             </li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock content %}

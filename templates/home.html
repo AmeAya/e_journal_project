@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>E Journal Project</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
     {% if not user.is_authenticated %}
         <a href="{% url 'login' %}">
             <button>
@@ -28,5 +23,4 @@
             <p>Price: {{ subject.price }}</p>
         {% endfor %}
     {% endif %}
-</body>
-</html>
+{% endblock content %}
