@@ -13,6 +13,11 @@
         </a>
     {% else %}
         <h1>{{ type }} - {{ user.username }}</h1>
+        <a href="{% url 'student_cabinet' %}">
+            <button>
+                My Cabinet
+            </button>
+        </a>
         <a href="{% url 'logout' %}">
             <button>
                 Logout
