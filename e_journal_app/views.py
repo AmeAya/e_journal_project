@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 
 # Create your views here.
@@ -16,6 +16,13 @@ def homeView(request):
                       'type': thisUserType,
                       'subjects': subjects
                   }) # context - datas to show on template
+
+def cabinetView(request):
+    try:
+        Student.objects.get(user_id=request.user)
+        return redirect('student_cabinet')
+    except:
+        return redirect('home')
 
 def studentCabinetView(request):
     thisStudent = Student.objects.get(user_id=request.user)
