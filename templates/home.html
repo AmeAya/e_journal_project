@@ -18,7 +18,13 @@
                 Logout
             </button>
         </a>
-        {% for subject in subjects %}
+        <br>
+        <a href="{% url 'all_students' %}">
+            <button>
+                Set Attendance
+            </button>
+        </a>
+        {% for subject in subjects.all %}
             <h3>Subject Name: {{ subject.title }}</h3>
             <p>Price: {{ subject.price }}</p>
         {% endfor %}
