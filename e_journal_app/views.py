@@ -69,12 +69,15 @@ def changeStudentView(request):
 
 def teacherAddSubjectsView(request):
     if request.method == 'POST':
-        subject_id = int(request.POST.get('subjects'))
-        new_subject = Subject.objects.get(id=int(subject_id))
-        thisTeacher = Teacher.objects.get(user_id=request.user)
-        thisTeacher.subject.add(new_subject)
-        thisTeacher.save()
-        return redirect('home')
+        try:
+            subject_id = int(request.POST.get('subjects'))
+            new_subject = Subject.objects.get(id=int(subject_id))
+            thisTeacher = Teacher.objects.get(user_id=request.user)
+            thisTeacher.subject.add(new_subject)
+            thisTeacher.save()
+            return redirect('home')
+        except TypeError:
+            return redirect('add_subjects')
     else:
         teachersSubjects = set(Teacher.objects.get(user_id=request.user).subject.all())
         allSubjects = set(Subject.objects.all())
