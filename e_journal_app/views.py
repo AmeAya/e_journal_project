@@ -69,7 +69,12 @@ def changeStudentView(request):
 
 def teacherAddSubjectsView(request):
     if request.method == 'POST':
-        pass
+        subject_id = int(request.POST.get('subjects'))
+        new_subject = Subject.objects.get(id=int(subject_id))
+        thisTeacher = Teacher.objects.get(user_id=request.user)
+        thisTeacher.subject.add(new_subject)
+        thisTeacher.save()
+        return redirect('home')
     else:
         teachersSubjects = set(Teacher.objects.get(user_id=request.user).subject.all())
         allSubjects = set(Subject.objects.all())
