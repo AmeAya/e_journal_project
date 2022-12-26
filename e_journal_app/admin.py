@@ -24,3 +24,9 @@ class StudentAdmin(admin.ModelAdmin):
         from django.utils.html import format_html
         result = Grade.objects.filter(student=obj).aggregate(Avg('points'))
         return format_html('<b>{}</b>', result['points__avg'])
+
+# Только в Админке. В модели не лезть
+# Для Group сделать фильтр по дате поступления
+# Сделать поисковик среди Teacher
+# Добавить колонку в Subject price но в kzt
+# Счиать что 1 кредит в Price равен 22000 KZT
