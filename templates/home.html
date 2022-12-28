@@ -24,7 +24,7 @@
                 Add Subjects
             </button>
         </a>
-        {% for subject in subjects.all %}
+        {% for subject in subjects %}
             <h3>Subject Name: {{ subject.title }}</h3>
             <p>Price: {{ subject.price }}</p>
         {% endfor %}

@@ -7,7 +7,11 @@ def homeView(request):
     try:
         thisStudent = Student.objects.get(user_id=thisUser) # get data from table Student
         thisUserType = 'Student'
-        subjects = Subject.objects.all()
+        subjects = Grade.objects.filter(student=thisStudent)
+        unique_subjects = set()
+        for sub in subjects:
+            unique_subjects.add(sub.subject)
+        subjects = unique_subjects
         return render(request,
                       template_name='home.html',
                       context={
