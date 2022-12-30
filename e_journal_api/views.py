@@ -83,3 +83,18 @@ class GroupDetailApiView(APIView):
                     data=serializer.errors,
                     status=status.HTTP_400_BAD_REQUEST
                 )
+
+    def delete(self, request, group_id, *args, **kwargs):
+        thisGroup = self.get_object(group_id)
+        if thisGroup is None:
+            return Response(
+                data={'error': 'Group does not exist'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        else:
+            thisGroup.delete()
+            return Response(
+                data={'success': 'Object deleted!'},
+                status=status.HTTP_200_OK
+            )
+
