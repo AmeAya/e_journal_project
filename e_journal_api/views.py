@@ -54,3 +54,32 @@ class GroupDetailApiView(APIView):
                 data=serializer.data,
                 status=status.HTTP_200_OK
             )
+
+    def put(self, request, group_id, *args, **kwargs): # update
+        thisGroup = self.get_object(group_id)
+        if thisGroup is None:
+            return Response(
+                data={'error': 'Group does not exist'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        else:
+            data = {
+                'name': request.data.get('name'),
+                'admission_year': request.data.get('admission_year')
+            }
+            serializer = GroupSerializer(
+                instance=thisGroup,
+                data=data,
+                partial=True
+            )
+            if serializer.is_valid():
+                serializer.save()
+                return Response(
+                    data=serializer.data,
+                    status=status.HTTP_200_OK
+                )
+            else:
+                return Response(
+                    data=serializer.errors,
+                    status=status.HTTP_400_BAD_REQUEST
+                )
