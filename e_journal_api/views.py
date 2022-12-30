@@ -1,8 +1,8 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions
-from e_journal_app.models import Student
-from .serializers import StudentSerializer
+from e_journal_app.models import Student, Group
+from .serializers import StudentSerializer, GroupSerializer
 
 class StudentApiView(APIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -32,4 +32,25 @@ class StudentApiView(APIView):
             return Response(
                 data=serializer.errors,
                 status=status.HTTP_400_BAD_REQUEST
+            )
+
+class GroupDetailApiView(APIView):
+    def get_object(self, group_id):
+        try:
+            return Group.objects.get(id=group_id)
+        except:
+            return None
+
+    def get(self, request, group_id, *args, **kwargs):
+        thisGroup = self.get_object(group_id)
+        if thisGroup is None:
+            return Response(
+                data={'error': 'Group does not exist'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        else:
+            serializer = GroupSerializer(thisGroup)
+            return Response(
+                data=serializer.data,
+                status=status.HTTP_200_OK
             )
