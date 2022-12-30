@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from e_journal_api import urls as api_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('rest_api/', include('rest_framework.urls')),
+    path('api/', include(api_urls)),
     path('', include('e_journal_app.urls')),
 ]

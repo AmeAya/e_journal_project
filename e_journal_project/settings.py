@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'e_journal_app',
+    'rest_framework',
+    'e_journal_api',
 ]
 
 MIDDLEWARE = [
